@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="fill">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://kit.fontawesome.com/72494a92d2.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../static/css/main.css">
+<title>Car Collection</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark py-3">
+        <div class="container-fluid pt-2">
+            <a href="{{ url_for('site.home') }}" class="navbar-brand h1">Car Collection</a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse col-10 pb-2" id="navmenu">
+                <ul class="navbar-nav col-12">
+                    <li class="nav-item col-1 justify-content-center d-flex">
+                        <a href="{{ url_for('site.home') }}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item col-1 justify-content-center d-flex">
+                        <a href="{{ url_for('site.profile') }}" class="nav-link">Profile</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item col-1 justify-content-center d-flex text-nowrap">
+                        <a href="{{ url_for('site.add_car') }}" class="nav-link ps-2 pe-2">Add a Car</a>
+                    </li>
+                    <li class="col-8">
+                        <!-- Spacing for the navbar items -->
+                    </li>
+                    {% else %}
+                    <li class="col-8">
+                        <!-- Spacing for the navbar items -->
+                    </li>
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item col-1 justify-content-center d-flex ps-5 pe-5">
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link ps-3 pe-3 btn btn-secondary">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item col-1 justify-content-center d-flex ps-5 pe-5 text-nowrap">
+                        <a href="{{ url_for('auth.signin') }}" class="nav-link ps-3 pe-3 btn btn-secondary btn-sm pb-2">Sign In</a>
+                    </li>
+                    <li class="nav-item col-1 justify-content-center d-flex ps-5 pe-5 text-nowrap">
+                        <a href="{{ url_for('auth.signup') }}" class="nav-link ps-3 pe-3 btn btn-secondary">Sign Up</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Body Content -->
+    <div class="d-flex flex-row fill">
+        <div class="d-flex flex-row col-9">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="d-flex flex-row sm-col-6 col-3 justify-content-center">
+            <form action="" method="GET" class="col-12 p-5 bg-secondary">
+                <h1 class="d-flex justify-content-center pb-3">Search for a Car</h1>
+                <div class="d-flex justify-content-center mb-3 form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Honda">
+                    <label for="floatingInput">Make</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Civic">
+                    <label for="floatingInput">Model</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="2017">
+                    <label for="floatingInput">Year</label>
+                </div>
+                <div class="d-flex mb-3 justify-content-center pt-3">
+                    <a href="#" class="btn btn-secondary border-0" type="button">Search</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary mt-auto">
+        <div class="container-fluid bg-primary d-flex flex-row justify-content-evenly p-2">
+            <div class="container-fluid d-flex flex-column p-2">
+                <div class="container-fluid d-flex flex-row justify-content-evenly text-center">
+                    <a href="#" class="footer-link ps-2">Link</a>
+                    <a href="#" class="footer-link">Link</a>
+                    <a href="#" class="footer-link">Link</a>
+                </div>
+                <div class="container-fluid d-flex flex-row justify-content-center p-2">
+                    <p class="small text-white">&copy; 2023 Car Collection</p>
+                </div>
+            </div>
+            <div class="container-fluid d-flex flex-row justify-content-evenly align-items-center">
+                <a href="#" class="socials fb"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="socials tw"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="socials yt"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="socials tt"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="socials ig"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

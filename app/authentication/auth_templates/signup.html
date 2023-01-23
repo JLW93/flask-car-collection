@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="d-flex flex-row p-5">
+    <div class="col-7">
+        <aside class="col-12 col-md-6">
+            <h2 class="text-nowrap">Create an Account</h2>
+            {% include 'forms.html' %}
+        </aside>
+    </div>
+    <div class="d-flex flex-row col-7">
+        <div class="col-12">
+            <img src="../../static/images/undraw_join_re_w1lh.svg" alt="" class="img-fluid p-3">
+        </div>
+    </div>
+</main>
+
+{% endblock %}
