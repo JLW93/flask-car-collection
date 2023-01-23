@@ -18,15 +18,19 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.String, primary_key = True)
-    first_name = db.Column(db.String(100), nullable = True, default = '')
-    last_name = db.Column(db.String(100), nullable = True, default = '')
+    first_name = db.Column(db.String(100), nullable = False)
+    last_name = db.Column(db.String(100), nullable = False)
     email = db.Column(db.String(150), nullable = False)
     password = db.Column(db.String, nullable = True, default = '')
     g_auth_verify = db.Column(db.Boolean, default = False)
     token = db.Column(db.String, default = '', unique = True)
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
-    def __init__(self, email, first_name = '', last_name = '', password = '', token = '', g_auth_verify = False):
+    def __init__(self, first_name, last_name, email, password = '', token = '', g_auth_verify = False):
+        # There was an issue with user sign up, where the info entered into the signup form was being added to the wrong columns
+        # i.e. first_name and email were getting mixed up, and user accounts were not able to log in
+        # made first_name and last_name not nullable and rearranged the order in which they are entered in the __init__
+        # this fixed that issue
         self.id = self.set_id()
         self.first_name = first_name
         self.last_name = last_name
